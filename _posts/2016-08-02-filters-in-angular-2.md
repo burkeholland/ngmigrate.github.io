@@ -1,7 +1,7 @@
 ---
 layout: post
 permalink: /angular-2-filters
-title: Creating Filters In Angular 2
+title: Using Pipes In Angular 2
 author: burkeholland
 path: 2016-04-02-filters-in-angular-2.md
 tags: filters
