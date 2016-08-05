@@ -37,7 +37,6 @@ For example, suppose we have a list of groceries, and we want to display each gr
 const app = {
   template: `
     <div>
-      Grocery selected: {{ $ctrl.selectedGrocery.label }}
       <ul>
         <li ng-repeat="grocery in $ctrl.groceries">
           {% raw %}{{ grocery.label }}{% endraw %}
@@ -75,7 +74,6 @@ Application requirements might dictate that we display each item in all caps. To
 const app = {
   template: `
     <div>
-      Grocery selected: {{ $ctrl.selectedGrocery.label }}
       <ul>
         <li ng-repeat="grocery in $ctrl.groceries">
           {% raw %}{{ grocery.label | uppercase }}{% endraw %}
@@ -97,12 +95,9 @@ It is also possible to assign filters at the collection level. One of the most p
 const app = {
   template: `
     <div>
-      Grocery selected: {%raw }{{ $ctrl.selectedGrocery.label }}{% endraw }
       <ul>
         <li ng-repeat="grocery in $ctrl.groceries | orderBy: 'label'">
-          <a href="" ng-click="$ctrl.selectGrocery(grocery);">
-            {%raw }{{ grocery.label | uppercase }}{% end raw }
-          </a>
+          {% raw %}{{ grocery.label | uppercase }}{% endraw %}
         </li>
       </ul>
     </div>
@@ -115,13 +110,14 @@ const app = {
 
 Model-bound values - such as collections, can also be filtered in Angular 1.x using, well, Filters. This is another extremely useful feature in Angular 1. In the above example, we might want to filter the list while a user types in a filter box. Angular allows us to pass a model value to the filter which automatically gets applied to the collection.
 
+{% highlight javascript %}
 const app = {
   template: `
     <div>
       Filter Groceries: <input ng-model="$ctrl.searchText">
       <ul>
         <li ng-repeat="grocery in $ctrl.groceries | orderBy: 'label' | filter: $ctrl.searchText">
-          {{ grocery.label | uppercase }}
+          {% raw %}{{ grocery.label | uppercase }}{% endraw %}
         </li>
       </ul>
     </div>
@@ -134,6 +130,7 @@ const app = {
 angular
   .module('app')
   .component('app', app);
+{% endhighlight %}
 
 Notice in the above example that multiple filters can be chained together using pipes. Pretty nifty, right? We're just scratching the surface of filters here, but if you've used  Angular 1.x, it's likely that you are already aware of the importance of filters in Angular applications. Filters are incredibly powerful and a good understanding of how to use them will exponentially increase your ability to effectively use Angular in your apps.
 
@@ -159,7 +156,7 @@ interface Grocery {
     <div>
       <ul>
         <li *ngFor="let grocery of groceries">
-          {{ grocery.label | uppercase }}
+          {% raw %}{{ grocery.label | uppercase }}{% endraw %}
         </li>
       </ul>
     </div>
@@ -205,7 +202,7 @@ First, instead of a looping over the actual array, we can loop over a copy that 
      Search Term: <input type="text" [(ngModel)]="searchTerm">
       <ul>
         <li *ngFor="let grocery of orderedGroceries">
-          {{ grocery.label | uppercase }}
+          {% raw %}{{ grocery.label | uppercase }}{% endraw %}
         </li>
       </ul>
     </div>
